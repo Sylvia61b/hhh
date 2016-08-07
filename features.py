@@ -52,7 +52,21 @@ def enhancedFeatureExtractor(datum):
     features = basicFeatureExtractor(datum)
 
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    original_feature = np.array(features)
+    new_features = np.zeros(3, int)
+    count = 0
+
+    for w in range(DIGIT_DATUM_WIDTH):
+        for h in range(DIGIT_DATUM_HEIGHT):
+            if original_feature[DIGIT_DATUM_HEIGHT*w+h] == 0:
+                count += 1
+                dfs(width, height, original_feature)
+
+    if count <=3:
+        new_features[count-1] = 1
+
+    return np.append(features, new_features)
+
 
     return features
 
